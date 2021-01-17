@@ -1,31 +1,44 @@
 package tudelft.chocolate;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ChocolateBagsBeforeBoundaryTest {
-    @Test
-    public void totalIsBiggerThanAmountOfBars() {
-        ChocolateBags bags = new ChocolateBags();
-        int result = bags.calculate(1, 1, 10);
-        Assertions.assertEquals(-1, result);
+
+    private ChocolateBags calc;
+    @BeforeEach
+    public void InitCalc(){
+
+        this.calc = new ChocolateBags();
     }
 
     @Test
-    public void onlyBigBars() {
-        int result = new ChocolateBags().calculate(5, 3, 10);
-        Assertions.assertEquals(0, result);
+    public void NotEnoughBars(){
+
+        int result = calc.calculate(1,1,6);
+
+        Assertions.assertEquals(1, result);
     }
 
     @Test
-    public void bigAndSmallBars() {
-        int result = new ChocolateBags().calculate(5, 3, 17);
-        Assertions.assertEquals(2, result);
+    public void OnlyBigBars(){
+        int result = calc.calculate(5, 3, 10);
+
+        Assertions.assertEquals(0,result);
     }
 
     @Test
-    public void onlySmallBars() {
-        int result = new ChocolateBags().calculate(4, 2, 3);
-        Assertions.assertEquals(3, result);
+    public void BigAndSmallCombi(){
+        int result = calc.calculate(1, 3, 17);
+
+        Assertions.assertEquals(-1,result);
+    }
+
+    @Test
+    public void OnlySmallBars(){
+        int result = calc.calculate(5, 3, 4);
+
+        Assertions.assertEquals(4,result);
     }
 }
